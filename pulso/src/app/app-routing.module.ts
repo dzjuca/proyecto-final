@@ -26,6 +26,14 @@ const routes: Routes = [
     path: '',
     redirectTo: 'intro',
     pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   }
 ];
 

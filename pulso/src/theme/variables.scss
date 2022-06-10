@@ -74,6 +74,16 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+/** pulso-login **/
+
+--ion-color-login: #43CEBB;
+--ion-color-login-rgb: 67,206,187;
+--ion-color-login-contrast: #ffffff;
+--ion-color-login-contrast-rgb: 255,255,255;
+--ion-color-login-shade: #3bb5a5;
+--ion-color-login-tint: #56d3c2;
+
 }
 
 @media (prefers-color-scheme: dark) {
