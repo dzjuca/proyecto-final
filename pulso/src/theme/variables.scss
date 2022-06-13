@@ -86,6 +86,17 @@
 
 }
 
+.ion-color-login {
+	--ion-color-base: var(--ion-color-login);
+	--ion-color-base-rgb: var(--ion-color-login-rgb);
+	--ion-color-contrast: var(--ion-color-login-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-login-contrast-rgb);
+	--ion-color-shade: var(--ion-color-login-shade);
+	--ion-color-tint: var(--ion-color-login-tint);
+}
+
+
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors
