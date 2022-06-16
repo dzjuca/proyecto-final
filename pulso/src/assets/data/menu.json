@@ -1,7 +1,27 @@
 [
   {
+    "icon":"information-circle",
+    "name":"Intro",
+    "redirectTo":"/intro"
+  },
+  {
+    "icon":"person-circle",
+    "name":"Perfil",
+    "redirectTo":"/perfil"
+  },
+  {
+    "icon":"log-in",
+    "name":"Login",
+    "redirectTo":"/login"
+  },
+  {
     "icon":"home",
     "name":"Home",
     "redirectTo":"/home"
+  },
+  {
+    "icon":"clipboard",
+    "name":"Registro",
+    "redirectTo":"/registro"
   }
 ]
