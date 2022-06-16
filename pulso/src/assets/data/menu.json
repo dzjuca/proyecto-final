@@ -23,5 +23,10 @@
     "icon":"clipboard",
     "name":"Registro",
     "redirectTo":"/registro"
+  },
+  {
+    "icon":"american-football",
+    "name":"Pulso",
+    "redirectTo":"/pulso"
   }
 ]
