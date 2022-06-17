@@ -1,9 +1,18 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>pulso</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-split-pane contentId="pulsoMain">
+  <ion-menu contentId="pulsoMain" menuId="pulsoMenu" side="start" type="overlay">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Pulso</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-menu-toggle>
+        <ion-item *ngFor="let item of menuOptions | async" [routerLink]="item.redirectTo">
+          <ion-icon slot="start" [name]="item.icon"></ion-icon>
+          <ion-label>{{item.name}}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="pulsoMain"></ion-router-outlet>
+</ion-split-pane>

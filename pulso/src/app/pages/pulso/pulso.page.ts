@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Menu } from 'src/app/models/menu';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-pulso',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PulsoPage implements OnInit {
 
-  constructor() { }
+  menuOptions:Observable<Menu[]>;
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.menuOptions = this.dataService.getMenuOpts();
   }
-
 }

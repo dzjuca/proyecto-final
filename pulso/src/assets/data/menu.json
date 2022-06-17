@@ -2,21 +2,21 @@
   {
     "icon":"home",
     "name":"Home",
-    "redirectTo":"home"
-  },
-  {
-    "icon":"person-circle",
-    "name":"Perfil",
-    "redirectTo":"perfil"
+    "redirectTo":"/pulso/home"
   },
   {
     "icon":"american-football",
     "name":"Inicio",
-    "redirectTo":"inicio"
+    "redirectTo":"/pulso/inicio"
+  },
+  {
+    "icon":"person-circle",
+    "name":"Perfil",
+    "redirectTo":"/pulso/perfil"
   },
   {
     "icon":"settings",
     "name":"Configuaración",
-    "redirectTo":"settings"
+    "redirectTo":"/pulso/settings"
   }
 ]
