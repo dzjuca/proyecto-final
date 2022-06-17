@@ -9,11 +9,6 @@ const routes: Routes = [
     component: PulsoPage,
     children:[
       {
-        path: '',
-        redirectTo: 'perfil',
-        pathMatch: 'full'
-      },
-      {
         path: 'home',
         loadChildren: () => import('../../pages/home/home.module').then( m => m.HomePageModule)
       },
@@ -24,6 +19,15 @@ const routes: Routes = [
       {
         path: 'settings',
         loadChildren: () => import('../../pages/settings/settings.module').then( m => m.SettingsPageModule)
+      },
+      {
+        path: 'inicio',
+        loadChildren: () => import('../../pages/inicio/inicio.module').then( m => m.InicioPageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
       }
     ]
   }

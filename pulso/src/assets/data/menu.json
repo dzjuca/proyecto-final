@@ -1,32 +1,22 @@
 [
   {
-    "icon":"information-circle",
-    "name":"Intro",
-    "redirectTo":"/intro"
+    "icon":"home",
+    "name":"Home",
+    "redirectTo":"home"
   },
   {
     "icon":"person-circle",
     "name":"Perfil",
-    "redirectTo":"/perfil"
-  },
-  {
-    "icon":"log-in",
-    "name":"Login",
-    "redirectTo":"/login"
-  },
-  {
-    "icon":"home",
-    "name":"Home",
-    "redirectTo":"/home"
-  },
-  {
-    "icon":"clipboard",
-    "name":"Registro",
-    "redirectTo":"/registro"
+    "redirectTo":"perfil"
   },
   {
     "icon":"american-football",
-    "name":"Pulso",
-    "redirectTo":"/pulso"
+    "name":"Inicio",
+    "redirectTo":"inicio"
+  },
+  {
+    "icon":"settings",
+    "name":"Configuaración",
+    "redirectTo":"settings"
   }
 ]

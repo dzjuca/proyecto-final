@@ -8,6 +8,7 @@ import { PulsoPageRoutingModule } from './pulso-routing.module';
 
 import { PulsoPage } from './pulso.page';
 import { ComponentsModule } from '../../components/components.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     PulsoPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    RouterModule
   ],
   declarations: [PulsoPage]
 })

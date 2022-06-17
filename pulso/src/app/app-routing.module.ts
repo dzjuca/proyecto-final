@@ -22,10 +22,6 @@ const routes: Routes = [
   {
     path: 'pulso',
     loadChildren: () => import('./pages/pulso/pulso.module').then( m => m.PulsoPageModule)
-  },
-  {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   }
 ];
 
