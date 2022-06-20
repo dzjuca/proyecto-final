@@ -4,14 +4,13 @@ ion-button{
   var(--color)-selected: var(--ion-color-dark)
 }
 
-ion-header{
-  ion-toolbar{
-    ion-title{
-      font-size: 1rem;
-      ion-icon{
-        margin-bottom: -3px;
+ion-header {
+  ion-toolbar {
+      ion-title {
+          font-weight: bold;
+          font-family: cursive;
+          font-size: 1.6rem;
       }
-    }
   }
 }
 

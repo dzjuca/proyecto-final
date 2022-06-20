@@ -1,11 +1,6 @@
 [
   {
     "icon":"home",
-    "name":"Home",
-    "redirectTo":"/pulso/home"
-  },
-  {
-    "icon":"american-football",
     "name":"Inicio",
     "redirectTo":"/pulso/inicio"
   },
@@ -15,8 +10,18 @@
     "redirectTo":"/pulso/perfil"
   },
   {
+    "icon":"pricetags",
+    "name":"Productos",
+    "redirectTo":"/pulso/home"
+  },
+  {
     "icon":"settings",
-    "name":"Configuaración",
+    "name":"Configuaraciones",
     "redirectTo":"/pulso/settings"
+  },
+  {
+    "icon":"exit",
+    "name":"Cerrar Sesión",
+    "redirectTo":"/"
   }
 ]

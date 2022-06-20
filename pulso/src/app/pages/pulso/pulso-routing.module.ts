@@ -10,12 +10,12 @@ const routes: Routes = [
     children:[
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'inicio',
         pathMatch: 'full'
       },
       {
         path: 'home',
-        loadChildren: () => import('../../pages/home/home.module').then( m => m.HomePageModule)
+        loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
       },
       {
         path: 'inicio',
