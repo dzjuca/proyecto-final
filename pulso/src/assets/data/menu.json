@@ -22,6 +22,6 @@
   {
     "icon":"exit",
     "name":"Cerrar Sesión",
-    "redirectTo":"/"
+    "redirectTo":"/login"
   }
 ]

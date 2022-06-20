@@ -1,17 +1,29 @@
 <ion-split-pane contentId="pulsoMain">
   <ion-menu contentId="pulsoMain" menuId="pulsoMenu" side="start" type="overlay">
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Pulso</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
       <ion-menu-toggle>
-        <ion-item *ngFor="let item of menuOptions | async" [routerLink]="item.redirectTo">
-          <ion-icon slot="start" [name]="item.icon"></ion-icon>
-          <ion-label>{{item.name}}</ion-label>
+        <ion-item color="primary">
+          <ion-avatar slot="start">
+            <img src='/assets/img/avatar/law.png' />
+          </ion-avatar>
+          <ion-label>
+            <ion-text>
+              <h2>Daniel Z. Juca</h2>
+              <p> dzjuca@gmail.com</p>
+            </ion-text>
+          </ion-label>
         </ion-item>
       </ion-menu-toggle>
+    </ion-header>
+    <ion-content>
+      <ion-list style="padding-top: 0px;">
+        <ion-menu-toggle>
+          <ion-item *ngFor="let item of menuOptions | async" [routerLink]="item.redirectTo">
+            <ion-icon slot="start" [name]="item.icon"></ion-icon>
+            <ion-label>{{item.name}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="pulsoMain"></ion-router-outlet>

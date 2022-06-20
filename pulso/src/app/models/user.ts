@@ -1,11 +1,20 @@
 import { Post } from './post';
 export interface User {
-  _id:string
-  username:string;
+  id?:number;
   email:string;
   password:string;
-  phone?:string;
+  name:string;
+  birthday?:Date;
+  phone?:number;
   avatar?:string;
+  subscription?:Subscription;
   date?:Date;
   posts?:Post[];
+}
+
+enum Subscription{
+  diaria  = "diaria",
+  semanal = "semanal",
+  mensual = "mensual",
+  anual = "anual"
 }
