@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { format, parseISO } from 'date-fns';
 
 @Component({
   selector: 'app-registro',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroPage implements OnInit {
 
+  public formattedDate?: string;
+  public dateValue?: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  formatDate() {
+    this.formattedDate = format(parseISO(this.dateValue), 'MMM d, yyyy');
   }
 
 }

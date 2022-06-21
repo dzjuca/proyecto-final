@@ -24,3 +24,14 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.datetime-modal {
+  --border-radius: 8px;
+  --width: 325px;
+  --height: 434px;
+}
+
+ion-datetime {
+  width: 325px;
+  height: 434px;
+}
