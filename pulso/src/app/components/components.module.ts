@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { InputComponent } from './input/input.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [HeaderComponent, InputComponent, MenuComponent]
 })

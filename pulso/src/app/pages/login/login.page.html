@@ -21,22 +21,8 @@
   </div>
 
   <form id="form">
-    <app-input
-      placeholder="Email"
-      type="text"
-      iconName="mail"
-    ></app-input>
-
-    <app-input
-      placeholder="Password"
-      type="password"
-      iconName="lock-closed"
-    ></app-input>
-
-    <ion-button
-      expand="block"
-      shape="round"
-      color="login"
-    >Login</ion-button>
+    <app-input placeholder="Email" type="text" iconName="mail" [value]="email"></app-input>
+    <app-input placeholder="Password" type="password" iconName="lock-closed" [value]="password"></app-input>
+    <ion-button expand="block" shape="round" color="login" (click)="doLogin()">Iniciar Sesión</ion-button>
   </form>
 </ion-content>
