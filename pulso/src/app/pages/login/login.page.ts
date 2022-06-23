@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
 import { LoginService } from '../../services/login.service';
@@ -10,8 +10,10 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginPage implements OnInit {
 
-  email: string
-  password: string
+  @Input() value:string;
+
+  email: string;
+  password: string;
 
   constructor(private loginService: LoginService,
               private router:Router,
@@ -23,6 +25,7 @@ export class LoginPage implements OnInit {
 
   doLogin(){
     console.log('[LoginPage]: doLogin()');
+    console.log('Email: '+this.email + ", Password: "+ this.password);
     this.loginService.login(this.email, this.password)
                      .then(() => {
                       this.router.navigateByUrl('/pulso')
