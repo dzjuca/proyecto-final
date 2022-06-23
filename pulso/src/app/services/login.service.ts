@@ -34,12 +34,17 @@ export class LoginService {
     });
    }
 
-   logout(){
-
-   }
-
-   addUser(){
-
+   addUser(user:User):Promise<User>{
+    console.log(`[LoginService]: addUser(${JSON.stringify(user)})`);
+    return new Promise((resolve,reject) => {
+      let url = this.rootUrl + `/users`;
+      this.http.post(url, user)
+               .subscribe((user:User) => {
+                resolve(user);
+               },(e) => {
+                reject(e)
+               });
+    });
    }
 
    getuser(){
@@ -53,4 +58,8 @@ export class LoginService {
    updateUser(){
 
    }
+
+   logout(){
+
+  }
 }

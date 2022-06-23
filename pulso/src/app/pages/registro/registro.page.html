@@ -11,14 +11,14 @@
     <h1>Registrar Cuenta</h1>
     <img src="assets/img/logo/logo_1.png" alt="">
   </div>
-  <form id="form">
-    <app-input placeholder="*Nombre" type="text" iconName="person"></app-input>
-    <app-input placeholder="*Email" type="text" iconName="mail"></app-input>
-    <app-input placeholder="*Password" type="password" iconName="lock-closed"></app-input>
-    <app-input placeholder="Telefono" type="number" iconName="phone-portrait-outline"></app-input>
-    <app-input type="date" iconName="calendar-outline"></app-input>
-  </form>
+  <div class="registro">
+    <app-input placeholder="*Nombre" type="text" iconName="person" [(ngModel)]="user.name"></app-input>
+    <app-input placeholder="*Email" type="email" iconName="mail" [(ngModel)]="user.email"></app-input>
+    <app-input placeholder="*Password" type="password" iconName="lock-closed" [(ngModel)]="user.password"></app-input>
+    <app-input placeholder="Telefono" type="tel" iconName="phone-portrait-outline" [(ngModel)]="user.phone"></app-input>
+    <app-input type="date" iconName="calendar-outline" [(ngModel)]="user.birthday"></app-input>
+  </div>
 
-  <ion-button class="loginBottom" expand="block" shape="round" color="login">Registrar</ion-button>
+  <ion-button class="loginBottom" expand="block" shape="round" color="login" (click)="doRegister()">Registrar</ion-button>
 
 </ion-content>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { format, parseISO } from 'date-fns';
+import { User } from 'src/app/models/user';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-registro',
@@ -8,16 +10,22 @@ import { format, parseISO } from 'date-fns';
 })
 export class RegistroPage implements OnInit {
 
-  public formattedDate?: string;
-  public dateValue?: string;
+  constructor( private loginService:LoginService) { }
 
-  constructor() { }
+  user:User = {
+    email:'',
+    password:'',
+    name:'',
+    birthday: new Date(),
+    phone:0
+  }
 
   ngOnInit() {
   }
 
-  formatDate() {
-    this.formattedDate = format(parseISO(this.dateValue), 'MMM d, yyyy');
+  doRegister(){
+    console.log(this.user)
+    this.loginService.addUser(this.user)
   }
 
 }
