@@ -61,6 +61,7 @@ app.post('/pulso/sessions', function (req, res) {
     console.log('POST /pulso/sessions');
     if (!req.body.email || !req.body.password) res.send(400, 'Missing data');
     else {
+        
         db.collection('users').findOne({
             email: req.body.email,
             password: req.body.password

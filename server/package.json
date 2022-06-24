@@ -4,7 +4,7 @@
   "description": "servidor de desarrollo temporal para el backend de la aplicación Pulso",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server2/server2.js"
+    "start": "nodemon index1.js"
   },
   "author": "Daniel Z. Juca",
   "license": "ISC",
