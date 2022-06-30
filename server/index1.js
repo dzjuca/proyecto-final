@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const User = require('./models/user');
 require('dotenv').config();
 
+// models
+const User = require('./models/user');
+
+// settings
 const port = process.env.PORT || 8080;
 
+// app init
 var app = express();
 
 /* DataBase connection */
