@@ -10,13 +10,21 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [HeaderComponent, InputComponent, MenuComponent],
+  declarations: [
+    HeaderComponent,
+    InputComponent,
+    MenuComponent,
+  ],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
     FormsModule
   ],
-  exports: [HeaderComponent, InputComponent, MenuComponent]
+  exports: [
+    HeaderComponent,
+    InputComponent,
+    MenuComponent,
+  ]
 })
 export class ComponentsModule { }

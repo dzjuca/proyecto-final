@@ -23,9 +23,9 @@
 </ion-header>
 
 <ion-content fullscreen="true" slot="fixed" >
-    <div class="container">
+    <div class="container" (click)="presentActionSheet()">
       <ion-avatar class="outer">
-        <img [src]="user.avatar"/>
+        <img [src]="user.avatar || 'assets/img/avatar/profilePhoto.png'"/>
         <div class="inner" *ngIf="mode === 'view'">
           <ion-icon name="camera"  class="camera-icon"></ion-icon>
        </div>
