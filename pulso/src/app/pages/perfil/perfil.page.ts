@@ -25,7 +25,7 @@ export class PerfilPage implements OnInit {
     this.mode = 'view';
     this.disabled = true;
 
-    /* this.user = this.loginService.getUser();
+    this.user = this.loginService.getUser();
     if(!this.user.name) this.user.name = '';
     if(!this.user.username) this.user.username = '';
     if(!this.user.email) this.user.email = '';
@@ -33,7 +33,7 @@ export class PerfilPage implements OnInit {
     if(!this.user.phone) this.user.phone = '';
     if(!this.user.subscription) this.user.subscription = 'Diaria';
     if(!this.user.avatar) this.user.avatar = 'assets/img/avatar/profilePhoto.png';
-    */
+
 
   }
 
