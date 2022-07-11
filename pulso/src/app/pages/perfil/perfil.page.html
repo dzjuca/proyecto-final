@@ -25,7 +25,7 @@
 <ion-content fullscreen="true" slot="fixed" >
     <div class="container" (click)="presentActionSheet()">
       <ion-avatar class="outer">
-        <img [src]="user.avatar || 'assets/img/avatar/profilePhoto.png'"/>
+        <img [src]="user.avatar"/>
         <div class="inner" *ngIf="mode === 'view'">
           <ion-icon name="camera"  class="camera-icon"></ion-icon>
        </div>
@@ -72,7 +72,7 @@
       <ion-item>
         <ion-label position="stacked">Cumpleaños</ion-label>
         <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
-        <ion-input [disabled]="disabled" type="text" [(ngModel)]="user.birthday"></ion-input>
+        <ion-input [disabled]="disabled" [ngModel]="user.birthday| date:'yyyy-MM-dd'" (ngModelChange)="user.birthday = $event" type="date" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Teléfono</ion-label>
@@ -82,7 +82,7 @@
       <ion-item>
         <ion-label position="stacked">Membresía</ion-label>
         <ion-icon slot="start" name="card-outline"></ion-icon>
-        <ion-input disabled="true" type="text" [(ngModel)]="user.suscription"></ion-input>
+        <ion-input disabled="true" type="text" [(ngModel)]="user.subscription"></ion-input>
       </ion-item>
     </div>
 </ion-content>

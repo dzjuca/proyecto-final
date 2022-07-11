@@ -12,7 +12,7 @@ export class LoginPage implements OnInit {
 
   @Input() value:string;
 
-  email: string;
+  username: string;
   password: string;
 
   constructor(private loginService: LoginService,
@@ -25,8 +25,8 @@ export class LoginPage implements OnInit {
 
   doLogin(){
     console.log('[LoginPage]: doLogin()');
-    console.log('Email: '+this.email + ", Password: "+ this.password);
-    this.loginService.login(this.email, this.password)
+    console.log('Email: '+this.username + ", Password: "+ this.password);
+    this.loginService.login(this.username, this.password)
                      .then(() => {
                       this.router.navigateByUrl('/pulso')
                      })

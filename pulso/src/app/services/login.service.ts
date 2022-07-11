@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 
@@ -8,26 +8,35 @@ import { User } from '../models/user';
 })
 export class LoginService {
 
-  //private rootUrl = 'http://localhost:3000/pulso';
-  private rootUrl = 'https://pulsobackend.herokuapp.com/pulso'
+  private rootUrl = 'http://localhost:3000/pulso';
+  // private rootUrl = 'https://pulsobackend.herokuapp.com/pulso'
   private token:string;
+  private userId:string;
+  private username:string;
   private user: User;
 
   constructor( private http: HttpClient ) {
     console.log('Hola desde: [LoginService]');
    }
 
-   login(email:string, password:string):Promise<void>{
-    console.log(`[LoginService] login(${email}, ${password})`)
+   login(username:string, password:string):Promise<void>{
+    console.log(`[LoginService] login(${username}, ${password})`)
     return new Promise((resolve, reject) => {
-      let url = this.rootUrl + `/sessions`;
-      this.http.post(url,{email:email, password:password})
-               .subscribe((data:{userId:string,token:string}) => {
-                this.token = data.token;
-                let url = this.rootUrl + `/users/${data.userId}`;
-                this.http.get(url,{params:{token:this.token}})
-                          .subscribe((user:User) => {
-                            this.user = user;
+      let url = this.rootUrl + `/auth/login`;
+      this.http.post(url,{username:username, password:password})
+               .subscribe((data:any) => {
+                this.token = data.body.token;
+                this.userId = data.body._id;
+                this.username = data.body.username;
+                let url = this.rootUrl + `/users/${this.userId}`;
+                const headers = new HttpHeaders({
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${this.token}`
+                });
+                const requestOptions = { headers: headers };
+                this.http.get(url,requestOptions)
+                          .subscribe((data:any) => {
+                            this.user = data.body;
                             resolve();
                           })
 
@@ -39,6 +48,8 @@ export class LoginService {
     return new Promise((resolve, reject) => {
       this.token = null;
       this.user = null;
+      this.userId = null;
+      this.username = null;
       resolve();
     });
    }
@@ -65,7 +76,7 @@ export class LoginService {
    updateUser(user:User){
     console.log(`[LoginService]: updateUser(${JSON.stringify(user)})`);
     return new Promise((resolve, reject) => {
-      let url = this.rootUrl + `/users/${this.user.id}`;
+      let url = this.rootUrl + `/users/${this.userId}`;
       this.http.put(url, user, {params: {token:this.token}})
                .subscribe((user:User) => {
                 this.user = user;

@@ -13,11 +13,12 @@ export class RegistroPage implements OnInit {
   constructor( private loginService:LoginService) { }
 
   user:User = {
+    name:'',
+    username:'',
     email:'',
     password:'',
-    name:'',
     birthday: new Date(),
-    phone:0
+    phone:''
   }
 
   ngOnInit() {

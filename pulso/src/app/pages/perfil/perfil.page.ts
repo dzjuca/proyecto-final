@@ -4,38 +4,44 @@ import { MenuController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  styleUrls: ['./perfil.page.scss']
 })
 export class PerfilPage implements OnInit {
 
   mode:string;
   disabled:boolean;
-  user:any ={
-    name:"Daniel Z. Juca",
-    password:"1234",
-    email:"dzjuca@gmail.com",
-    username:"__daniel82__",
-    birthday:"05-06-1982",
-    phone:"0984746267",
-    suscription: "Mensual",
-    avatar:"/assets/img/avatar/ian-avatar.png"
-  }
+  user:User;
 
   constructor(
+    private loginService:LoginService,
     private menu: MenuController,
-    private modalController: ModalController,
     private actionSheetController: ActionSheetController,
     ) {
     this.mode = 'view';
     this.disabled = true;
+
+    /* this.user = this.loginService.getUser();
+    if(!this.user.name) this.user.name = '';
+    if(!this.user.username) this.user.username = '';
+    if(!this.user.email) this.user.email = '';
+    if(!this.user.birthday) this.user.birthday = new Date(0);
+    if(!this.user.phone) this.user.phone = '';
+    if(!this.user.subscription) this.user.subscription = 'Diaria';
+    if(!this.user.avatar) this.user.avatar = 'assets/img/avatar/profilePhoto.png';
+    */
+
   }
 
   ngOnInit() {
+
   }
+
+
 
   editPerfil(){
     this.mode = 'edit';

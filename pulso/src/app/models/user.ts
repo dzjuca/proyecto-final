@@ -1,15 +1,16 @@
 import { Post } from './post';
 export interface User {
-  id?:number;
-  email:string;
-  password:string;
+  _id?:number;
   name:string;
+  username:string;
+  email:string;
+  password?:string;
   birthday?:Date;
-  phone?:number;
+  phone?:string;
   avatar?:string;
-  subscription?:Subscription;
-  date?:Date;
-  posts?:Post[];
+  subscription?:string;
+  role?:string;
+  createdOn?:Date;
 }
 
 enum Subscription{
