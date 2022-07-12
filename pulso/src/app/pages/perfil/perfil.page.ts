@@ -31,17 +31,14 @@ export class PerfilPage implements OnInit {
     if(!this.user.email) this.user.email = '';
     if(!this.user.birthday) this.user.birthday = new Date(0);
     if(!this.user.phone) this.user.phone = '';
-    if(!this.user.subscription) this.user.subscription = 'Diaria';
+    if(!this.user.subscription) this.user.subscription = '';
     if(!this.user.avatar) this.user.avatar = 'assets/img/avatar/profilePhoto.png';
-
 
   }
 
   ngOnInit() {
 
   }
-
-
 
   editPerfil(){
     this.mode = 'edit';
@@ -89,7 +86,7 @@ export class PerfilPage implements OnInit {
           type: 'delete'
         },
         handler: () => {
-          this.user.avatar = '';
+          this.user.avatar = 'assets/img/avatar/profilePhoto.png';
         }
       },
       {

@@ -26,26 +26,52 @@ ion-content{
       border-radius: 20%;
     }
   }
+
   .registro{
-    margin-top: 5%;
+    margin-top: 10%;
     padding-left: 30px;
     padding-right: 30px;
-
-    ion-button{
-      margin-top: 35px;
-      height: 48px;
-      font-size: 18px;
-      text-transform: initial;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    ion-item{
+      margin-top: 5%;
       border-radius: 50px;
-      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
-      --box-shadow:none;
+      height: 55px;
+      box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+      --highlight-height: 0px;
+
+      ion-input{
+        font-size: 18px;
+        --padding-top: 20px;
+        --padding-bottom: 15px;
+        --padding-start: 5px;
+      }
+      &.is-valid{
+        border: 2px solid green;
+      }
+      &.is-invalid{
+        border: 2px solid red;
+      }
+
+      a{
+        font-size: 17px;
+        letter-spacing: 0.5px;
+        text-decoration: none;
+      }
+    }
+    .loginBottom{
+      margin-top: 25%;
+    }
+    .messages{
+      padding-left: 10%;
+      opacity: 0;
+      transition: all 0.5s ease-in;
+      &.active{
+        opacity: 1;
+      }
     }
   }
 
-  .loginBottom{
-    margin-top: 15%;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-
 }
+
+

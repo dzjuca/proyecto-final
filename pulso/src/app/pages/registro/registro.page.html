@@ -11,14 +11,61 @@
     <h1>Registrar Cuenta</h1>
     <img src="assets/img/logo/logo_1.png" alt="">
   </div>
-  <div class="registro">
-    <app-input placeholder="*Nombre" type="text" iconName="person" [(ngModel)]="user.name"></app-input>
-    <app-input placeholder="*Email" type="email" iconName="mail" [(ngModel)]="user.email"></app-input>
-    <app-input placeholder="*Password" type="password" iconName="lock-closed" [(ngModel)]="user.password"></app-input>
-    <app-input placeholder="Telefono" type="tel" iconName="phone-portrait-outline" [(ngModel)]="user.phone"></app-input>
-    <app-input type="date" iconName="calendar-outline" [(ngModel)]="user.birthday"></app-input>
-  </div>
+   <form class="registro" [formGroup]="registerForm" (ngSubmit)="doRegister($event)">
 
-  <ion-button class="loginBottom" expand="block" shape="round" color="login" (click)="doRegister()">Registrar</ion-button>
+    <ion-item [class.is-valid]="isUsernameFieldValid" [class.is-invalid]="isUsernameFieldInvalid">
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-input type="text" placeholder="*Usuario" formControlName="username"></ion-input>
+    </ion-item>
+    <div class="messages" [class.active]="isUsernameFieldInvalid">
+      <ng-container *ngFor="let validation of validation_messages.username">
+        <div *ngIf="usernameField.hasError(validation.type) && (usernameField.dirty || usernameField.touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item [class.is-valid]="isEmailFieldValid" [class.is-invalid]="isEmailFieldInvalid">
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <ion-input type="mail" placeholder="*Correo" formControlName="email"></ion-input>
+    </ion-item>
+    <div class="messages" [class.active]="isEmailFieldInvalid">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message" *ngIf="emailField.hasError(validation.type) && (emailField.dirty || emailField.touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item  [class.is-valid]="isPasswordFieldValid" [class.is-invalid]="isPasswordFieldInvalid">
+      <ion-icon slot="start" name="lock-closed"></ion-icon>
+      <ion-input type="password" placeholder="*Contraseña" formControlName="password"></ion-input>
+    </ion-item>
+    <div class="messages" [class.active]="isPasswordFieldInvalid">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div *ngIf="passwordField.hasError(validation.type) && (passwordField.dirty || passwordField.touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+
+    <ion-item [class.is-valid] = "isConfirmPasswordFieldValid" [class.is-invalid]="isConfirmPasswordFieldInvalid">
+      <ion-icon slot="start" name="lock-closed"></ion-icon>
+      <ion-input type="password" placeholder="*Confirmar contraseña" formControlName="confirmPassword"></ion-input>
+    </ion-item>
+    <div class="messages" [class.active]="isConfirmPasswordFieldInvalid">
+      <ng-container *ngFor="let validation of validation_messages.confirmPassword">
+        <div *ngIf="confirmPasswordField.hasError(validation.type) && (passwordField.dirty || passwordField.touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+
+
+
+    <ion-button type="submit" class="loginBottom" expand="block" shape="round" color="login">Registrar</ion-button>
+  </form>
 
 </ion-content>
