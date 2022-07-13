@@ -1,14 +1,26 @@
-<ion-header >
+<ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" >
+    <ion-buttons slot="start">
       <ion-menu-button menu="pulsoMenu" *ngIf="mode==='view'"></ion-menu-button>
       <ion-button *ngIf="mode==='edit'" (click)="cancel()">
         <ion-icon slot="start" name="close"></ion-icon>
         Cancelar
       </ion-button>
     </ion-buttons>
-    <ion-title mode="md" color="dark" style="text-align: center;" *ngIf="mode==='view'">Mi Perfil</ion-title>
-    <ion-title mode="md" color="dark" style="text-align: center;" *ngIf="mode==='edit'">Editar Perfil</ion-title>
+    <ion-title
+      mode="md"
+      color="dark"
+      style="text-align: center"
+      *ngIf="mode==='view'"
+      >Mi Perfil</ion-title
+    >
+    <ion-title
+      mode="md"
+      color="dark"
+      style="text-align: center"
+      *ngIf="mode==='edit'"
+      >Editar Perfil</ion-title
+    >
     <ion-buttons slot="end">
       <ion-button *ngIf="mode === 'view'" (click)="editPerfil()">
         <ion-icon slot="start" name="create-outline"></ion-icon>
@@ -22,67 +34,92 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" slot="fixed" >
-    <div class="container" (click)="presentActionSheet()">
-      <ion-avatar class="outer">
-        <img [src]="user.avatar"/>
-        <div class="inner" *ngIf="mode === 'view'">
-          <ion-icon name="camera"  class="camera-icon"></ion-icon>
-       </div>
-      </ion-avatar>
-    </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-chip color="dark" mode="ios" outline="true">
-            <ion-label>44.4K</ion-label>
-            <ion-icon name="create"></ion-icon>
-          </ion-chip>
-        </ion-col>
-        <ion-col size="4">
-          <ion-chip color="dark" mode="ios" outline="true">
-            <ion-label>11.4K</ion-label>
-            <ion-icon name="chatbubble-ellipses"></ion-icon>
-          </ion-chip>
-        </ion-col>
-        <ion-col size="4">
-          <ion-chip color="dark" mode="ios" outline="true">
-            <ion-label>44.1K</ion-label>
-            <ion-icon name="heart"></ion-icon>
-          </ion-chip>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div class="forms">
-      <ion-item>
-        <ion-label position="stacked">Usuario</ion-label>
-        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-        <ion-input [disabled]="disabled" type="text" [(ngModel)]="user.username"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
-        <ion-icon slot="start" name="person-outline"></ion-icon>
-        <ion-input [disabled]="disabled" type="text" [(ngModel)]="user.name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-icon slot="start" name="mail-outline"></ion-icon>
-        <ion-input [disabled]="disabled" type="mail" [(ngModel)]="user.email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Cumpleaños</ion-label>
-        <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
-        <ion-input [disabled]="disabled" [ngModel]="user.birthday| date:'yyyy-MM-dd'" (ngModelChange)="user.birthday = $event" type="date" ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Teléfono</ion-label>
-        <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
-        <ion-input [disabled]="disabled" type="tel" [(ngModel)]="user.phone"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Membresía</ion-label>
-        <ion-icon slot="start" name="card-outline"></ion-icon>
-        <ion-input disabled="true" type="text" [(ngModel)]="user.subscription"></ion-input>
-      </ion-item>
-    </div>
+<ion-content fullscreen="true" slot="fixed">
+  <div class="container" (click)="presentActionSheet()">
+    <ion-avatar class="outer">
+      <img [src]="user.avatar" />
+      <div class="inner" *ngIf="mode === 'view'">
+        <ion-icon name="camera" class="camera-icon"></ion-icon>
+      </div>
+    </ion-avatar>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-chip color="dark" mode="ios" outline="true">
+          <ion-label>44.4K</ion-label>
+          <ion-icon name="create"></ion-icon>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="4">
+        <ion-chip color="dark" mode="ios" outline="true">
+          <ion-label>11.4K</ion-label>
+          <ion-icon name="chatbubble-ellipses"></ion-icon>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="4">
+        <ion-chip color="dark" mode="ios" outline="true">
+          <ion-label>44.1K</ion-label>
+          <ion-icon name="heart"></ion-icon>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="forms">
+    <ion-item>
+      <ion-label position="stacked">Usuario</ion-label>
+      <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+      <ion-input
+        [disabled]="disabled"
+        type="text"
+        [(ngModel)]="user.username"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <ion-input
+        [disabled]="disabled"
+        type="text"
+        [(ngModel)]="user.name"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
+      <ion-input
+        [disabled]="disabled"
+        type="mail"
+        [(ngModel)]="user.email"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Cumpleaños</ion-label>
+      <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
+      <ion-input
+        [disabled]="disabled"
+        [ngModel]="user.birthday| date:'yyyy-MM-dd'"
+        (ngModelChange)="user.birthday = $event"
+        type="date"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
+      <ion-input
+        [disabled]="disabled"
+        type="tel"
+        [(ngModel)]="user.phone"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Membresía</ion-label>
+      <ion-icon slot="start" name="card-outline"></ion-icon>
+      <ion-input
+        disabled="true"
+        type="text"
+        [(ngModel)]="user.subscription"
+      ></ion-input>
+    </ion-item>
+  </div>
 </ion-content>

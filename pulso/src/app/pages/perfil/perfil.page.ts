@@ -24,20 +24,10 @@ export class PerfilPage implements OnInit {
     ) {
     this.mode = 'view';
     this.disabled = true;
-
-    this.user = this.loginService.getUser();
-    if(!this.user.name) this.user.name = '';
-    if(!this.user.username) this.user.username = '';
-    if(!this.user.email) this.user.email = '';
-    if(!this.user.birthday) this.user.birthday = new Date(0);
-    if(!this.user.phone) this.user.phone = '';
-    if(!this.user.subscription) this.user.subscription = '';
-    if(!this.user.avatar) this.user.avatar = 'assets/img/avatar/profilePhoto.png';
-
   }
 
   ngOnInit() {
-
+    this.user = this.loginService.getUser();
   }
 
   editPerfil(){
@@ -46,16 +36,19 @@ export class PerfilPage implements OnInit {
     this.menu.enable(false, 'pulsoMenu');
   }
 
-  save(){
+  async save(){
     this.mode = 'view';
     this.disabled = true;
     this.menu.enable(true, 'pulsoMenu');
+    const respuesta:any = await this.loginService.updateUser(this.user);
+    console.log('[Respuesta]: ', respuesta.body);
   }
 
-  cancel(){
+  async cancel(){
     this.mode = 'view';
     this.disabled = true;
     this.menu.enable(true, 'pulsoMenu');
+    this.user = await this.loginService.getUser();
   }
 
   async presentActionSheet() {
@@ -85,8 +78,9 @@ export class PerfilPage implements OnInit {
         data: {
           type: 'delete'
         },
-        handler: () => {
+        handler: async () => {
           this.user.avatar = 'assets/img/avatar/profilePhoto.png';
+          await this.loginService.updateUser(this.user);
         }
       },
       {
@@ -121,6 +115,8 @@ export class PerfilPage implements OnInit {
     resultType:CameraResultType.Base64,
     source:CameraSource.Photos
   });
-  this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
+  console.log('[selectImage:DataUrl]: ', imageData)
+  //this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
+  //await this.loginService.updateUser(this.user);
  }
 }

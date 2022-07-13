@@ -33,8 +33,8 @@ export class LoginPage implements OnInit {
                      .catch((e) => {
                         this.alertCtrl.create({
                           header:'Error De Autenticación',
-                          message:e.message,
-                          buttons:[{text:'OK', role:'cancelar'}]
+                          message:'Usuario o Contraseña incorrectos',
+                          buttons:[{text:'OK', role:'Cancelar'}]
                         })
                         .then((alert) => alert.present());
                      });

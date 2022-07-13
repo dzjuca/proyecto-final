@@ -56,7 +56,7 @@ export class LoginService {
    addUser(user:User):Promise<User>{
     console.log(`[LoginService]: addUser(${JSON.stringify(user)})`);
     return new Promise((resolve,reject) => {
-      let url = this.rootUrl + `/users`;
+      let url = this.rootUrl + '/users';
       this.http.post(url, user)
                .subscribe((user:User) => {
                 resolve(user);
@@ -77,10 +77,16 @@ export class LoginService {
     console.log(`[LoginService]: updateUser(${JSON.stringify(user)})`);
     return new Promise((resolve, reject) => {
       let url = this.rootUrl + `/users/${this.userId}`;
-      this.http.put(url, user, {params: {token:this.token}})
-               .subscribe((user:User) => {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const requestOptions = { headers: headers };
+      this.http.put(url, user, requestOptions)
+               .subscribe((response:any) => {
                 this.user = user;
-                resolve(user);
+                console.log('[suscribe:user] ', this.user);
+                resolve(response);
                },(e) => reject(e));
     })
 

@@ -12,21 +12,13 @@ import { MyValidators } from '../../../utils/validators';
 export class RegistroPage implements OnInit {
 
   registerForm:FormGroup;
+  user:User;
 
   constructor(
     private loginService:LoginService,
     private formBuilder:FormBuilder) {
       this.buildRegisterForm();
     }
-
-  user:User = {
-    name:'',
-    username:'',
-    email:'',
-    password:'',
-    birthday: new Date(),
-    phone:''
-  }
 
   ngOnInit() {
 
@@ -45,12 +37,13 @@ export class RegistroPage implements OnInit {
 
   doRegister(event){
     if (this.registerForm.valid){
-      console.log(this.registerForm.value);
+      delete this.registerForm.value.confirmPassword;
+      this.user = this.registerForm.value;
+      console.log(this.user)
+      this.loginService.addUser(this.user)
     }else{
       this.registerForm.markAllAsTouched();
     }
-    //console.log(this.user)
-    //this.loginService.addUser(this.user)
   }
 
   validation_messages = {
@@ -68,7 +61,6 @@ export class RegistroPage implements OnInit {
     ],
 
   }
-
   get usernameField(){
     return this.registerForm.get('username');
   }
@@ -78,7 +70,6 @@ export class RegistroPage implements OnInit {
   get isUsernameFieldInvalid(){
     return this.usernameField.touched && this.usernameField.invalid;
   }
-
   get emailField(){
     return this.registerForm.get('email');
   }
@@ -88,7 +79,6 @@ export class RegistroPage implements OnInit {
   get isEmailFieldInvalid(){
     return this.emailField.touched && this.emailField.invalid;
   }
-
   get passwordField(){
     return this.registerForm.get('password');
   }
@@ -107,6 +97,4 @@ export class RegistroPage implements OnInit {
   get isConfirmPasswordFieldInvalid(){
     return this.confirmPasswordField.touched && this.confirmPasswordField.invalid || this.registerForm.hasError('match_password');
   }
-
-
 }
