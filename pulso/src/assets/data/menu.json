@@ -12,7 +12,7 @@
   {
     "icon":"pricetags",
     "name":"Productos",
-    "redirectTo":"/pulso/home"
+    "redirectTo":"/pulso/products"
   },
   {
     "icon":"settings",
