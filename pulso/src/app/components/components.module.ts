@@ -6,6 +6,8 @@ import { InputComponent } from './input/input.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PostComponent } from './post/post.component';
+import { PostsComponent } from './posts/posts.component';
 
 
 
@@ -14,6 +16,8 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     InputComponent,
     MenuComponent,
+    PostComponent,
+    PostsComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     InputComponent,
     MenuComponent,
+    PostsComponent
   ]
 })
 export class ComponentsModule { }

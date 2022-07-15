@@ -12,10 +12,3 @@ export interface User {
   role?:string;
   createdOn?:Date;
 }
-
-enum Subscription{
-  diaria  = "diaria",
-  semanal = "semanal",
-  mensual = "mensual",
-  anual = "anual"
-}

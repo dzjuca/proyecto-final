@@ -1,22 +1,9 @@
+import { User } from './user';
 export interface Post {
-   id: number;
-   logo: string;
-   username:string;
-   location: string;
-   src: string;
-   description:string;
-   likes: number;
-   image?:boolean;
-   wrap?:any;
+   _id?: string;
+   imgs?: string [];
+   message?: string;
+   coords?: string;
+   usuario?: User;
+   createdOn?: string;
  }
-
- // export interface Post {
-//   _id: string;
-//   userID:string;
-//   type:string;
-//   src: string;
-//   likesNumber: number;
-//   commentsNumber:number;
-//   description:string;
-//   date:Date;
-// }

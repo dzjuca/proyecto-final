@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { PostResponse } from '../models/post-response';
 
 const URL = environment.url
 
@@ -13,9 +14,9 @@ export class PostsService {
   constructor( private http:HttpClient) { }
 
   getPosts(){
-
     this.paginaPosts ++;
-    return this.http.get(`${URL}/posts/?pagina=${this.paginaPosts}`);
+    const url = `${URL}/pulso/posts/?pagina=${this.paginaPosts}`
+    return this.http.get<PostResponse>(url);
 
   }
 }
