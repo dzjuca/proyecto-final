@@ -17,11 +17,19 @@
 <ion-content color="light">
 
   <!-- Refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
   <!-- Posts -->
   <app-posts [posts]="posts"></app-posts>
+
   <!-- Infinite Scroll -->
-
-
+  <ion-infinite-scroll [disabled]="!isEnable" threshold="150px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PostComponent } from './post/post.component';
 import { PostsComponent } from './posts/posts.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -23,7 +24,8 @@ import { PostsComponent } from './posts/posts.component';
     CommonModule,
     IonicModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ],
   exports: [
     HeaderComponent,

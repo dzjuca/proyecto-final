@@ -13,9 +13,16 @@ export class PostsService {
 
   constructor( private http:HttpClient) { }
 
-  getPosts(){
+  getPosts( pull: boolean = false){
+
+    if (pull){
+
+      this.paginaPosts = 0;
+
+    }
+
     this.paginaPosts ++;
-    const url = `${URL}/pulso/posts/?pagina=${this.paginaPosts}`
+    const url = `${URL}/pulso/posts/?page=${this.paginaPosts}`
     return this.http.get<PostResponse>(url);
 
   }

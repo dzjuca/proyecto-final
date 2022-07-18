@@ -26,6 +26,11 @@ export class LoginService {
       this.http.post(url,{username:username, password:password})
                .subscribe((data:any) => {
                 this.token = data.body.token;
+
+               console.log('[LoginService:data]: ', data)
+
+
+
                 this.userId = data.body._id;
                 this.username = data.body.username;
                 let url = this.rootUrl + `/users/${this.userId}`;
