@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
+import { Storage } from '@capacitor/storage';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class LoginService {
   private username:string;
   private user: User;
 
-  constructor( private http: HttpClient ) {
+  constructor( private http: HttpClient) {
     console.log('Hola desde: [LoginService]');
    }
 
@@ -25,12 +26,13 @@ export class LoginService {
       let url = this.rootUrl + `/auth/login`;
       this.http.post(url,{username:username, password:password})
                .subscribe((data:any) => {
+                if(!data.error){
+                  this.saveToken(JSON.stringify(data.body.token))
+                }else{
+                  this.token = null;
+                  Storage.clear();
+                }
                 this.token = data.body.token;
-
-               console.log('[LoginService:data]: ', data)
-
-
-
                 this.userId = data.body._id;
                 this.username = data.body.username;
                 let url = this.rootUrl + `/users/${this.userId}`;
@@ -66,7 +68,8 @@ export class LoginService {
                .subscribe((user:User) => {
                 resolve(user);
                },(e) => {
-                reject(e)
+                console.log('[addUser:LoginServie]: ', e.message);
+                reject(e);
                });
     });
    }
@@ -96,4 +99,11 @@ export class LoginService {
     })
 
    }
+  async saveToken(token:string){
+    await Storage.set({
+      key: 'token',
+      value: token,
+    });
+  }
+
 }

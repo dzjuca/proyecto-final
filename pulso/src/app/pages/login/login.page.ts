@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { LoginService } from '../../services/login.service';
+import { UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,9 @@ export class LoginPage implements OnInit {
   constructor(private loginService: LoginService,
               private router:Router,
               private alertCtrl: AlertController,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              private navController:NavController,
+              private uiService:UiService) { }
 
   ngOnInit() {
   }
@@ -28,15 +31,11 @@ export class LoginPage implements OnInit {
     console.log('Email: '+this.username + ", Password: "+ this.password);
     this.loginService.login(this.username, this.password)
                      .then(() => {
-                      this.router.navigateByUrl('/pulso')
+                      this.router.navigateByUrl('/pulso');
+                      //this.navController.navigateRoot('/pulso', { animated: true});
                      })
                      .catch((e) => {
-                        this.alertCtrl.create({
-                          header:'Error De Autenticación',
-                          message:'Usuario o Contraseña incorrectos',
-                          buttons:[{text:'OK', role:'Cancelar'}]
-                        })
-                        .then((alert) => alert.present());
+                     this.uiService.presentAlert('Error de autenticación','Usuario o  contraseña incorrectos');
                      });
   }
 

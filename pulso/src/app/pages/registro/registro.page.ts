@@ -3,6 +3,8 @@ import { User } from 'src/app/models/user';
 import { LoginService } from '../../services/login.service';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MyValidators } from '../../../utils/validators';
+import { UiService } from '../../services/ui.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -16,7 +18,9 @@ export class RegistroPage implements OnInit {
 
   constructor(
     private loginService:LoginService,
-    private formBuilder:FormBuilder) {
+    private formBuilder:FormBuilder,
+    private uiService:UiService,
+    private router:Router) {
       this.buildRegisterForm();
     }
 
@@ -41,6 +45,14 @@ export class RegistroPage implements OnInit {
       this.user = this.registerForm.value;
       console.log(this.user)
       this.loginService.addUser(this.user)
+          .then((data) =>{
+            this.uiService.presentAlert('Registro', 'Registro realizado correctamente');
+            this.router.navigateByUrl('/login');
+          })
+          .catch((e) => {
+            console.log('[doRegister:regitropage]: ', e.message)
+            this.uiService.presentAlert('Error de registro', e.message)
+          });
     }else{
       this.registerForm.markAllAsTouched();
     }
