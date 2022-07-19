@@ -15,16 +15,43 @@
         </ion-item>
       </ion-menu-toggle>
     </ion-header>
+
     <ion-content>
       <ion-list style="padding-top: 0px;">
         <ion-menu-toggle>
-          <ion-item *ngFor="let item of menuOptions | async" [routerLink]="item.redirectTo">
-            <ion-icon slot="start" [name]="item.icon"></ion-icon>
-            <ion-label>{{item.name}}</ion-label>
+          <ion-item routerLink="/pulso/inicio">
+            <ion-icon slot="start" name="home"></ion-icon>
+            <ion-label>Inico</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/pulso/perfil">
+            <ion-icon slot="start" name="person-circle"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/pulso/products">
+            <ion-icon slot="start" name="pricetags"></ion-icon>
+            <ion-label>Productos</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/pulso/settings">
+            <ion-icon slot="start" name="settings"></ion-icon>
+            <ion-label>Configuaraciones</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item (click)="logout()">
+            <ion-icon slot="start" name="exit"></ion-icon>
+            <ion-label>Cerrar Sesión</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>
+
   </ion-menu>
   <ion-router-outlet id="pulsoMain"></ion-router-outlet>
 </ion-split-pane>
+

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UsuarioGuard } from './guards/usuario.guard';
+
 
 const routes: Routes = [
   {
@@ -21,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'pulso',
-    loadChildren: () => import('./pages/pulso/pulso.module').then( m => m.PulsoPageModule)
+    loadChildren: () => import('./pages/pulso/pulso.module').then( m => m.PulsoPageModule),
+    canLoad: [UsuarioGuard]
   }
 ];
 

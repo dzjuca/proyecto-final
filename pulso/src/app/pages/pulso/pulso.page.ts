@@ -29,7 +29,12 @@ export class PulsoPage implements OnInit {
     this.menuOptions = this.dataService.getMenuOpts();
     this.user = this.loginService.getUser();
   }
-  doExit() {
-    this.router.navigateByUrl('/login');
+  logout() {
+    //this.router.navigateByUrl('/login');
+    this.loginService.logout()
+                     .then(() => {
+                      this.router.navigateByUrl('/login');
+                     })
+
   }
 }

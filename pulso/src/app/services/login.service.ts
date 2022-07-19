@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -16,7 +17,8 @@ export class LoginService {
   private username:string;
   private user: User;
 
-  constructor( private http: HttpClient) {
+  constructor( private http: HttpClient,
+               private router:Router) {
     console.log('Hola desde: [LoginService]');
    }
 
@@ -52,11 +54,12 @@ export class LoginService {
    }
    logout():Promise<void>{
     console.log(`[LoginService]: logout()`);
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve) => {
       this.token = null;
       this.user = null;
       this.userId = null;
       this.username = null;
+      await Storage.remove({key:'token'});
       resolve();
     });
    }
@@ -99,11 +102,49 @@ export class LoginService {
     })
 
    }
-  async saveToken(token:string){
-    await Storage.set({
-      key: 'token',
-      value: token,
-    });
-  }
+   async saveToken(token:string){
+      await Storage.set({
+        key: 'token',
+        value: token,
+      });
+   }
+
+   async loadToken(){
+    const { value } = await Storage.get({ key: 'token' }) || null;
+    this.token = JSON.parse(value);
+    console.log('[loadToken]: ', this.token);
+   }
+
+   async validarToken():Promise<boolean>{
+
+    await this.loadToken();
+
+    if(!this.token){
+      this.router.navigateByUrl('/login');
+      return Promise.resolve(false);
+    }
+
+    return new Promise<boolean>( resolve => {
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const requestOptions = { headers: headers }
+      let url = this.rootUrl + `/users/user/bytoken`;
+      this.http.get(url, requestOptions)
+               .subscribe( (resp:any) => {
+                  if(!resp.error){
+                    this.user = resp.body;
+                    resolve(true);
+                  }else{
+                    this.router.navigateByUrl('/login');
+                    resolve(false);
+                  }
+               })
+    })
+   }
+
+
 
 }
