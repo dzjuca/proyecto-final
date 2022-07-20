@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path: 'settings',
         loadChildren: () => import('../../pages/settings/settings.module').then( m => m.SettingsPageModule)
+      },
+      {
+        path: 'post',
+        loadChildren: () => import('../../pages/post/post.module').then( m => m.PostPageModule)
       }
     ]
   }

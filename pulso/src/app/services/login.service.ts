@@ -80,13 +80,32 @@ export class LoginService {
     console.log(`[LoginService]: getUser() ${JSON.stringify(this.user)}`);
     return this.user;
    }
+   getUsuario(){
+
+    if( !this.user._id ){
+
+      this.validarToken();
+
+    }
+
+    return { ...this.user }
+
+   }
    getToken(){
     console.log(`[LoginService]: getToken() ${this.token}`);
     return this.token;
    }
    updateUser(user:User){
     console.log(`[LoginService]: updateUser(${JSON.stringify(user)})`);
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+
+      if(!this.userId){
+
+       const usuario =  await this.getUsuario();
+       this.userId = usuario._id;
+
+      }
+
       let url = this.rootUrl + `/users/${this.userId}`;
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -96,8 +115,11 @@ export class LoginService {
       this.http.put(url, user, requestOptions)
                .subscribe((response:any) => {
                 this.user = user;
-                console.log('[suscribe:user] ', this.user);
-                resolve(response);
+                if(!response.error){
+                  resolve(true)
+                }else{
+                  resolve(false);
+                }
                },(e) => reject(e));
     })
 
@@ -108,13 +130,11 @@ export class LoginService {
         value: token,
       });
    }
-
    async loadToken(){
     const { value } = await Storage.get({ key: 'token' }) || null;
     this.token = JSON.parse(value);
     console.log('[loadToken]: ', this.token);
    }
-
    async validarToken():Promise<boolean>{
 
     await this.loadToken();
@@ -144,7 +164,4 @@ export class LoginService {
                })
     })
    }
-
-
-
 }

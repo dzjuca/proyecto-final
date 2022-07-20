@@ -20,6 +20,17 @@ ngOnInit() {
 
   this.loadData();
 
+  this.postsService.newPost
+      .subscribe( (post) => {
+
+        this.posts.unshift( post );
+
+
+
+      });
+
+
+
 
 
 }

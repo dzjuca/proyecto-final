@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { LoginService } from 'src/app/services/login.service';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-perfil',
@@ -16,11 +17,13 @@ export class PerfilPage implements OnInit {
   mode:string;
   disabled:boolean;
   user:User;
+  usuario:User;
 
   constructor(
     private loginService:LoginService,
     private menu: MenuController,
     private actionSheetController: ActionSheetController,
+    private uiService:UiService
     ) {
     this.mode = 'view';
     this.disabled = true;
@@ -28,6 +31,8 @@ export class PerfilPage implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser();
+    this.usuario = this.loginService.getUsuario();
+    console.log('[ngOnInit:PerfilPage]: ', this.usuario)
   }
 
   editPerfil(){
@@ -40,8 +45,13 @@ export class PerfilPage implements OnInit {
     this.mode = 'view';
     this.disabled = true;
     this.menu.enable(true, 'pulsoMenu');
-    const respuesta:any = await this.loginService.updateUser(this.user);
-    console.log('[Respuesta]: ', respuesta.body);
+    const response = await this.loginService.updateUser(this.user);
+    if(response){
+      this.uiService.presentToast('Usuario Actualizado Correctamente');
+    }else{
+      this.uiService.presentToast('no fue posible la actualización');
+    }
+
   }
 
   async cancel(){
