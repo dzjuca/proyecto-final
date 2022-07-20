@@ -9,7 +9,7 @@
       <h5>{{post.usuario.email}}</h5>
     </ion-label>
   </ion-item>
-
+ <!--
   <ion-slides mode="ios" pager="ios" scrollbar="ios">
     <ion-slide class="image-slide"
                [style]=" img1 | domSanitizer">
@@ -20,12 +20,16 @@
     <ion-slide class="image-slide"
                [style]=" img3 | domSanitizer">
     </ion-slide>
-
-
   </ion-slides>
+  -->
 
   <!-- mapa -->
 
+  <app-map [coords]="post.coords"></app-map>
+
+
+
+  <!-- ---- -->
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline"></ion-icon>
     <ion-icon slot="end" name="bookmark-outline"></ion-icon>

@@ -9,16 +9,19 @@ import { FormsModule } from '@angular/forms';
 import { PostComponent } from './post/post.component';
 import { PostsComponent } from './posts/posts.component';
 import { PipesModule } from '../pipes/pipes.module';
-
+import { MapComponent } from './map/map.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     HeaderComponent,
     InputComponent,
     MenuComponent,
     PostComponent,
-    PostsComponent
+    PostsComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +34,8 @@ import { PipesModule } from '../pipes/pipes.module';
     HeaderComponent,
     InputComponent,
     MenuComponent,
-    PostsComponent
+    PostsComponent,
+    MapComponent
   ]
 })
 export class ComponentsModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 import { Router } from '@angular/router';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-post',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class PostPage implements OnInit {
 
   tempImages:string [] = [];
+  isLoadGeolocation = false;
   post = {
     message: '',
     coords: null,
@@ -33,6 +35,34 @@ export class PostPage implements OnInit {
     }
 
     this.router.navigateByUrl('pulso/inicio');
+
+  }
+
+  getGeolocation(){
+
+    if ( !this.post.position ){
+
+      this.post.coords = null;
+      return;
+
+    }
+
+    this.isLoadGeolocation = true;
+    Geolocation.getCurrentPosition()
+               .then((coordinates) => {
+
+                const coords = `${coordinates.coords.latitude},${coordinates.coords.longitude}`;
+                this.post.coords = coords;
+                this.isLoadGeolocation = false;
+
+               })
+               .catch((e) => {
+
+               console.log("🚀 ~ file: post.page.ts ~ line 58 ~ PostPage ~ getGeolocation ~ e", e);
+
+               });
+
+    console.log("🚀 ~ file: post.page.ts ~ line 14 ~ PostPage ~ post", this.post);
 
   }
 
