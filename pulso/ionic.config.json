@@ -1,5 +1,7 @@
 {
   "name": "pulso",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

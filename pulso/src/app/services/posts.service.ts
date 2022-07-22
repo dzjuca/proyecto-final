@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import { PostResponse } from '../models/post-response';
 import { LoginService } from './login.service';
 import { Post } from '../models/post';
+import { FileTransfer, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
+import { FileUploadOptions } from '@awesome-cordova-plugins/file-transfer/ngx';
 
 const URL = environment.url
 
@@ -18,7 +20,8 @@ export class PostsService {
 
 
   constructor( private http:HttpClient,
-               private loginService: LoginService) { }
+               private loginService: LoginService,
+               private fileTransfer: FileTransfer) { }
 
   getPosts( pull: boolean = false){
 
@@ -66,4 +69,40 @@ export class PostsService {
 
 
   }
+
+  uploadImage ( img: string) {
+
+    this.token = this.loginService.getToken();
+    if( !this.token ){
+      this.loginService.loadToken()
+          .then(() => {
+            this.token = this.loginService.getToken();
+          })
+    }
+    const url = `${URL}/pulso/posts/upload`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    const options: FileUploadOptions = {
+
+      fileKey: 'image',
+      headers: headers
+
+    };
+
+    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+    fileTransfer.upload( img, url, options)
+                .then( (data) => {
+                console.log("🚀 ~ file: posts.service.ts ~ line 90 ~ PostsService ~ .then ~ data", data);
+                })
+                .catch((e) => {
+                console.log("🚀 ~ file: posts.service.ts ~ line 93 ~ PostsService ~ uploadImage ~ e", e);
+                })
+
+  }
+
+
 }

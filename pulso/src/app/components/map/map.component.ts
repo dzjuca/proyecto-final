@@ -22,7 +22,6 @@ export class MapComponent implements OnInit {
 
     console.log("🚀 ~ file: map.component.ts ~ line 13 ~ MapComponent ~ coords", this.coords)
 
-
   }
 
   ngAfterViewInit(): void{
