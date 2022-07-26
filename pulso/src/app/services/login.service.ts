@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
+const URL = environment.url
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private rootUrl = 'http://localhost:3000/pulso';
+  //private rootUrl = 'http://localhost:3000/pulso';
   // private rootUrl = 'https://pulsobackend.herokuapp.com/pulso'
   private token:string;
   private userId:string;
@@ -25,11 +27,11 @@ export class LoginService {
    login(username:string, password:string):Promise<void>{
     console.log(`[LoginService] login(${username}, ${password})`)
     return new Promise((resolve, reject) => {
-      let url = this.rootUrl + `/auth/login`;
+      let url = `${URL}/pulso/auth/login`;
       this.http.post(url,{username:username, password:password})
-               .subscribe((data:any) => {
+               .subscribe(async (data:any) => {
                 if(!data.error){
-                  this.saveToken(JSON.stringify(data.body.token))
+                  await this.saveToken(JSON.stringify(data.body.token))
                 }else{
                   this.token = null;
                   Storage.clear();
@@ -37,7 +39,7 @@ export class LoginService {
                 this.token = data.body.token;
                 this.userId = data.body._id;
                 this.username = data.body.username;
-                let url = this.rootUrl + `/users/${this.userId}`;
+                let url = `${URL}/pulso/users/${this.userId}`;
                 const headers = new HttpHeaders({
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${this.token}`
@@ -59,14 +61,15 @@ export class LoginService {
       this.user = null;
       this.userId = null;
       this.username = null;
-      await Storage.remove({key:'token'});
+      //await Storage.remove({key:'token'});
+      await Storage.clear();
       resolve();
     });
    }
    addUser(user:User):Promise<User>{
     console.log(`[LoginService]: addUser(${JSON.stringify(user)})`);
     return new Promise((resolve,reject) => {
-      let url = this.rootUrl + '/users';
+      let url = `${URL}/pulso/users`;
       this.http.post(url, user)
                .subscribe((user:User) => {
                 resolve(user);
@@ -106,7 +109,7 @@ export class LoginService {
 
       }
 
-      let url = this.rootUrl + `/users/${this.userId}`;
+      let url = `${URL}/pulso/users/${this.userId}`;
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`
@@ -129,6 +132,7 @@ export class LoginService {
         key: 'token',
         value: token,
       });
+      await this.validarToken();
    }
    async loadToken(){
     const { value } = await Storage.get({ key: 'token' }) || null;
@@ -151,7 +155,7 @@ export class LoginService {
         'Authorization': `Bearer ${this.token}`
       });
       const requestOptions = { headers: headers }
-      let url = this.rootUrl + `/users/user/bytoken`;
+      let url = `${URL}/pulso/users/user/bytoken`;
       this.http.get(url, requestOptions)
                .subscribe( (resp:any) => {
                   if(!resp.error){

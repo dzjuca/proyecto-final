@@ -33,12 +33,13 @@ export class PostPage implements OnInit {
   async crearPost(){
 
     console.log('[crearPost:PostPage]: ', this.post);
-    const response = await this.postsService.addPost( this.post );
+    await this.postsService.addPost( this.post );
     this.post = {
       message: '',
       coords: null,
       position: false
     }
+    this.tempImages = [];
 
     this.router.navigateByUrl('pulso/inicio');
 
@@ -72,80 +73,60 @@ export class PostPage implements OnInit {
 
   }
 
-  async takeImage(){
-    const imageData = await Camera.getPhoto({
-      quality:100,
-      allowEditing:false,
-      resultType:CameraResultType.Base64,
-      source:CameraSource.Camera
-    });
-    console.log("🚀 ~ file: post.page.ts ~ line 79 ~ PostPage ~ takeImage ~ imageData", imageData)
+  camera(){
+
+    const options: ImageOptions = {
+
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      correctOrientation: true
+
+
+    }
+
+    this.imageProcessing(options);
 
    }
 
- async selectImages(){
-  const imageData = await Camera.getPhoto({
-    quality:100,
-    allowEditing:false,
-    resultType:CameraResultType.Base64,
-    source:CameraSource.Photos
-  });
-  console.log('[selectImage:DataUrl]: ', imageData)
-  //this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
-  //await this.loginService.updateUser(this.user);
- }
+  galeria(){
 
- camera(){
+    const options: ImageOptions = {
 
-  const options: ImageOptions = {
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+      correctOrientation: true
 
-    quality: 100,
-    allowEditing: false,
-    resultType: CameraResultType.Uri,
-    source: CameraSource.Camera,
-    correctOrientation: true
+    }
 
+    this.imageProcessing(options);
 
-  }
+   }
 
-  this.imageProcessing(options);
+  imageProcessing( options: ImageOptions){
 
- }
+    Camera.getPhoto(options)
+    .then(( imageData ) => {
+      console.log("🚀 ~ file: post.page.ts ~ line 108 ~ PostPage ~ .then ~ imageData", imageData)
+      const img = imageData.webPath;
+      this.postsService.uploadImage2( imageData );
+      this.tempImages.push( img );
+    })
+    .catch((e) => {
 
- galeria(){
+      console.log("🚀 ~ file: post.page.ts ~ line 114 ~ PostPage ~ camera ~ e", e);
 
-  const options: ImageOptions = {
-
-    quality: 100,
-    allowEditing: false,
-    resultType: CameraResultType.Uri,
-    source: CameraSource.Photos,
-    correctOrientation: true
-
-  }
-
-  this.imageProcessing(options);
-
- }
-
- imageProcessing( options: ImageOptions){
-
-  Camera.getPhoto(options)
-  .then(( imageData ) => {
-    console.log("🚀 ~ file: post.page.ts ~ line 108 ~ PostPage ~ .then ~ imageData", imageData)
-    const img = imageData.webPath;
-    //const img = Capacitor.convertFileSrc(imageData.webPath);
-    //this.postsService.uploadImage( imageData.webPath );
-    this.tempImages.push( img );
-  })
-  .catch((e) => {
-
-  console.log("🚀 ~ file: post.page.ts ~ line 114 ~ PostPage ~ camera ~ e", e);
-
-  })
+    })
 
 
- }
+   }
+
+   cancel(){
+
+   }
 
 
 }

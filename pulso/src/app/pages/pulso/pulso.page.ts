@@ -5,6 +5,8 @@ import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/models/user';
+import { NavController } from '@ionic/angular';
+import { PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'app-pulso',
@@ -22,7 +24,9 @@ export class PulsoPage implements OnInit {
 
   constructor(private dataService: DataService,
               private router:Router,
-              private loginService: LoginService
+              private loginService: LoginService,
+              private navController: NavController,
+              private postsService: PostsService
               ) { }
 
   ngOnInit() {
@@ -33,7 +37,9 @@ export class PulsoPage implements OnInit {
     //this.router.navigateByUrl('/login');
     this.loginService.logout()
                      .then(() => {
-                      this.router.navigateByUrl('/login');
+                      //this.router.navigateByUrl('/login');
+                      this.postsService.paginaPosts = 0;
+                      this.navController.navigateRoot('/login', { animated: true });
                      })
 
   }

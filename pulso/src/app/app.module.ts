@@ -11,7 +11,6 @@ import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
 
 
 
@@ -27,7 +26,7 @@ import { FileTransfer } from '@awesome-cordova-plugins/file-transfer/ngx';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [ FileTransfer, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [ { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
