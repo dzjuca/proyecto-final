@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+
   ],
   providers: [ { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

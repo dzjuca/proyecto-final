@@ -110,8 +110,8 @@ export class LoginService {
       }
 
       let url = `${URL}/pulso/users/${this.userId}`;
+      //'Content-Type': 'application/json',
       const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`
       });
       const requestOptions = { headers: headers };

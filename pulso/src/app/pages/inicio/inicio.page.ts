@@ -1,6 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { PostsService } from '../../services/posts.service';
 import { Post } from '../../models/post';
+import { User } from 'src/app/models/user';
+import { LoginService } from '../../services/login.service';
+import { ModalController } from '@ionic/angular';
+import { PostPage } from '../post/post.page';
 
 @Component({
   selector: 'app-inicio',
@@ -11,12 +15,16 @@ export class InicioPage implements OnInit {
 
   posts: Post[] = [];
   isEnable = true;
+  user: User;
 
-constructor( private postsService:PostsService) { }
+constructor( private postsService:PostsService,
+             private loginService: LoginService,
+             private modalController: ModalController) { }
 
 ngOnInit() {
 
   console.log('[ngOnInit]:InicioPage')
+  this.user = this.loginService.getUser();
 
   this.loadData();
 
@@ -24,8 +32,6 @@ ngOnInit() {
       .subscribe( (post) => {
 
         this.posts.unshift( post );
-
-
 
       });
 
@@ -58,6 +64,14 @@ loadData(event?, pull:boolean = false){
   });
 
 }
+
+
+postCreate() {
+  console.log('[LoginPage] signup()');
+  this.modalController.create({ component: PostPage})
+          .then((modal) => { modal.present() });
+}
+
 
 
 

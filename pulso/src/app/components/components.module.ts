@@ -11,6 +11,7 @@ import { PostsComponent } from './posts/posts.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { MapComponent } from './map/map.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     IonicModule,
     RouterModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    SwiperModule,
   ],
   exports: [
     HeaderComponent,

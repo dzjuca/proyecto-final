@@ -89,7 +89,7 @@ export class PerfilPage implements OnInit {
           type: 'delete'
         },
         handler: async () => {
-          this.user.avatar = 'assets/img/avatar/profilePhoto.png';
+          this.user.avatar = 'assets/avatars/av-1.png';
           await this.loginService.updateUser(this.user);
         }
       },
@@ -116,6 +116,7 @@ export class PerfilPage implements OnInit {
       source:CameraSource.Camera
     });
     this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
+    await this.loginService.updateUser(this.user);
    }
 
  async selectImages(){
@@ -125,8 +126,7 @@ export class PerfilPage implements OnInit {
     resultType:CameraResultType.Base64,
     source:CameraSource.Photos
   });
-  console.log('[selectImage:DataUrl]: ', imageData)
-  //this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
-  //await this.loginService.updateUser(this.user);
+  this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
+  await this.loginService.updateUser(this.user);
  }
 }

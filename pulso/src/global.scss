@@ -25,6 +25,11 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+/* Swiper */
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+
 .datetime-modal {
   --border-radius: 8px;
   --width: 325px;

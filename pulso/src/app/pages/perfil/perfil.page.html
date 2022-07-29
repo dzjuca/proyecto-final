@@ -7,20 +7,12 @@
         Cancelar
       </ion-button>
     </ion-buttons>
-    <ion-title
-      mode="md"
-      color="dark"
-      style="text-align: center"
-      *ngIf="mode==='view'"
-      >Mi Perfil</ion-title
-    >
-    <ion-title
-      mode="md"
-      color="dark"
-      style="text-align: center"
-      *ngIf="mode==='edit'"
-      >Editar Perfil</ion-title
-    >
+    <ion-title mode="md" color="dark" style="text-align: center" *ngIf="mode==='view'">
+      Mi Perfil
+    </ion-title>
+    <ion-title mode="md" color="dark" style="text-align: center" *ngIf="mode==='edit'">
+      Editar Perfil
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="mode === 'view'" (click)="editPerfil()">
         <ion-icon slot="start" name="create-outline"></ion-icon>
@@ -37,7 +29,7 @@
 <ion-content fullscreen="true" slot="fixed">
   <div class="container" (click)="presentActionSheet()">
     <ion-avatar class="outer">
-      <img src="/assets/avatars/{{user.avatar}}" />
+      <img [src]="user.avatar" />
       <div class="inner" *ngIf="mode === 'view'">
         <ion-icon name="camera" class="camera-icon"></ion-icon>
       </div>

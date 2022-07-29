@@ -4,12 +4,12 @@
       <ion-menu-toggle>
         <ion-item color="primary">
           <ion-avatar slot="start">
-            <img src="assets/img/avatar/profilePhoto.png"/>
+            <img [src]="user.avatar"/>
           </ion-avatar>
           <ion-label>
             <ion-text>
-              <h2>daniel3959</h2>
-              <p>daniel3959@email.com</p>
+              <h2>{{user.username}}</h2>
+              <p>{{user.email}}</p>
             </ion-text>
           </ion-label>
         </ion-item>

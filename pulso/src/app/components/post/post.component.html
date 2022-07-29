@@ -2,44 +2,36 @@
 
   <ion-item lines="none">
     <ion-avatar slot="start">
-      <img src="/assets/avatars/av-1.png" />
+      <img [src]="post.usuario.avatar" />
     </ion-avatar>
     <ion-label>
       <h3>{{post.usuario.username}}</h3>
       <h5>{{post.usuario.email}}</h5>
     </ion-label>
   </ion-item>
+  <swiper [config]="configSwiper"
+          *ngIf="post.imgs.length > 1"
+          [pagination]="{ clickable: true }">
+    <ng-template swiperSlide *ngFor="let img of post.imgs">
+        <ion-img class="image-slide"
+                 [style]=" ( img | imagen: post.usuario._id) | domSanitizer">
+        </ion-img>
+    </ng-template>
+  </swiper>
 
-  <!--
-  <ion-slides mode="ios" pager="ios" scrollbar="ios" *ngIf="post.imgs.length > 1">
-    <ion-slide class="image-slide"
-               [style]=" img1 | domSanitizer">
-    </ion-slide>
-  </ion-slides>
-  -->
-
-  <ion-slides mode="ios" pager="ios" scrollbar="ios" *ngIf="post.imgs.length > 1">
-    <ion-slide *ngFor="let img of post.imgs"
-               class="image-slide"
-               [style]=" ( img | imagen: post.usuario._id) | domSanitizer">
-    </ion-slide>
-  </ion-slides>
-
-  <ion-slides mode="ios" scrollbar="ios" *ngIf="post.imgs.length === 1" [options]="slideSoloOpts">
-    <ion-slide class="image-slide"
-               [style]=" ( post.imgs[0] | imagen: post.usuario._id) | domSanitizer">
-    </ion-slide>
-  </ion-slides>
-
-
-
-
+  <swiper [config]="configSwiper"
+          *ngIf="post.imgs.length === 1"
+          [pagination]="{ clickable: true }">
+    <ng-template swiperSlide>
+      <ion-img class="image-slide"
+              [style]=" ( post.imgs[0] | imagen: post.usuario._id) | domSanitizer">
+      </ion-img>
+    </ng-template>
+  </swiper>
 
   <!-- mapa -->
 
   <app-map [coords]="post.coords" *ngIf="post.coords"></app-map>
-
-
 
   <!-- ---- -->
   <ion-item lines="none">

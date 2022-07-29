@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { Camera, CameraResultType, CameraSource, ImageOptions } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
+import { ModalController } from '@ionic/angular';
 
 
 
@@ -25,7 +26,8 @@ export class PostPage implements OnInit {
   }
 
   constructor( private postsService: PostsService,
-               private router: Router) { }
+               private router: Router,
+               private modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -41,7 +43,8 @@ export class PostPage implements OnInit {
     }
     this.tempImages = [];
 
-    this.router.navigateByUrl('pulso/inicio');
+    //this.router.navigateByUrl('pulso/inicio');
+    this.modalController.dismiss();
 
   }
 
@@ -124,8 +127,9 @@ export class PostPage implements OnInit {
 
    }
 
-   cancel(){
-
+  postCancel(){
+      console.log('[UserPage] close()');
+      this.modalController.dismiss();
    }
 
 
