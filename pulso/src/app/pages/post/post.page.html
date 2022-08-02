@@ -12,7 +12,7 @@
 
     <ion-buttons slot="end">
       <ion-button (click)="crearPost()"
-                  [disabled]="post.message.length < 1 || isLoadGeolocation"
+                  [disabled]="(post.message.length < 1) || isLoadGeolocation"
                   color="primary">
         Compartir
       </ion-button>

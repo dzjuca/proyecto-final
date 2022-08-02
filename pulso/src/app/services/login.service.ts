@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Storage } from '@capacitor/storage';
@@ -23,7 +23,6 @@ export class LoginService {
                private router:Router) {
     console.log('Hola desde: [LoginService]');
    }
-
    login(username:string, password:string):Promise<void>{
     console.log(`[LoginService] login(${username}, ${password})`)
     return new Promise((resolve, reject) => {
@@ -82,6 +81,50 @@ export class LoginService {
    getUser():User{
     console.log(`[LoginService]: getUser() ${JSON.stringify(this.user)}`);
     return this.user;
+   }
+   getUsers(query?:string){
+
+    console.log(`[LoginService]: getUsers()`);
+    return new Promise (async (resolve, reject) => {
+      let url = `${URL}/pulso/users`;
+      let token = this.getToken();
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      });
+
+      let requestOptions = {};
+
+      if(query){
+
+        const params = new HttpParams().set('query', query);
+        requestOptions = { headers: headers, params: params};
+        console.log("🚀 ~ file: login.service.ts ~ line 102 ~ LoginService ~ returnnewPromise ~ requestOptions", requestOptions);
+
+      }else{
+
+        requestOptions = { headers: headers};
+        console.log("🚀 ~ file: login.service.ts ~ line 107 ~ LoginService ~ returnnewPromise ~ requestOptions", requestOptions);
+
+      }
+
+
+      this.http.get(url,requestOptions)
+               .subscribe((response:any) => {
+
+                const pulsoUsers = response.body;
+                resolve(pulsoUsers);
+
+               },(e) => {
+
+                console.log('[getUsers:LoginServie]: ', e.message);
+                reject(e);
+
+               })
+    })
+
+
+
    }
    getUsuario(){
 
