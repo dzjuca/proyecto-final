@@ -12,6 +12,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { MapComponent } from './map/map.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SwiperModule } from 'swiper/angular';
+import { ProductComponent } from './product/product.component';
+import { ProductsComponent } from './products/products.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { SwiperModule } from 'swiper/angular';
     MenuComponent,
     PostComponent,
     PostsComponent,
-    MapComponent
+    MapComponent,
+    ProductComponent,
+    ProductsComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +41,8 @@ import { SwiperModule } from 'swiper/angular';
     InputComponent,
     MenuComponent,
     PostsComponent,
-    MapComponent
+    MapComponent,
+    ProductsComponent
   ]
 })
 export class ComponentsModule { }

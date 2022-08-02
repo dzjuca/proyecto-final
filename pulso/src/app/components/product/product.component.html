@@ -1,0 +1,44 @@
+<div class="product">
+
+  <ion-item lines="none">
+    <ion-avatar slot="start">
+      <img [src]="product.usuario.avatar" />
+    </ion-avatar>
+    <ion-label>
+      <h3>{{product.usuario.username}}</h3>
+      <h5>{{product.usuario.email}}</h5>
+    </ion-label>
+  </ion-item>
+  <swiper [config]="configSwiper"
+          *ngIf="product.imgs.length > 1"
+          [pagination]="{ clickable: true }">
+    <ng-template swiperSlide *ngFor="let img of product.imgs">
+        <ion-img class="image-slide"
+                 [style]=" ( img | imagen: product.usuario._id) | domSanitizer">
+        </ion-img>
+    </ng-template>
+  </swiper>
+
+  <swiper [config]="configSwiper"
+          *ngIf="product.imgs.length === 1"
+          [pagination]="{ clickable: true }">
+    <ng-template swiperSlide>
+      <ion-img class="image-slide"
+              [style]=" ( product.imgs[0] | imagen: product.usuario._id) | domSanitizer">
+      </ion-img>
+    </ng-template>
+  </swiper>
+
+  <ion-item lines="none">
+    <ion-icon slot="start" name="heart-outline"></ion-icon>
+    <ion-icon slot="end" name="bookmark-outline"></ion-icon>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label text-wrap>
+      {{product.description}}
+    </ion-label>
+  </ion-item>
+
+</div>
+
