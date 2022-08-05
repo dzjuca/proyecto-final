@@ -21,7 +21,6 @@ export class LoginService {
 
   constructor( private http: HttpClient,
                private router:Router) {
-    console.log('Hola desde: [LoginService]');
    }
    login(username:string, password:string):Promise<void>{
     console.log(`[LoginService] login(${username}, ${password})`)
@@ -79,12 +78,9 @@ export class LoginService {
     });
    }
    getUser():User{
-    console.log(`[LoginService]: getUser() ${JSON.stringify(this.user)}`);
     return this.user;
    }
    getUsers(query?:string){
-
-    console.log(`[LoginService]: getUsers()`);
     return new Promise (async (resolve, reject) => {
       let url = `${URL}/pulso/users`;
       let token = this.getToken();
@@ -99,12 +95,10 @@ export class LoginService {
 
         const params = new HttpParams().set('query', query);
         requestOptions = { headers: headers, params: params};
-        console.log("🚀 ~ file: login.service.ts ~ line 102 ~ LoginService ~ returnnewPromise ~ requestOptions", requestOptions);
 
       }else{
 
         requestOptions = { headers: headers};
-        console.log("🚀 ~ file: login.service.ts ~ line 107 ~ LoginService ~ returnnewPromise ~ requestOptions", requestOptions);
 
       }
 
@@ -138,7 +132,6 @@ export class LoginService {
 
    }
    getToken(){
-    console.log(`[LoginService]: getToken() ${this.token}`);
     return this.token;
    }
    updateUser(user:User){
@@ -180,7 +173,6 @@ export class LoginService {
    async loadToken(){
     const { value } = await Storage.get({ key: 'token' }) || null;
     this.token = JSON.parse(value);
-    console.log('[loadToken]: ', this.token);
    }
    async validarToken():Promise<boolean>{
 

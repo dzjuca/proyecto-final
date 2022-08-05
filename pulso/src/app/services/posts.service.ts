@@ -16,12 +16,14 @@ const URL = environment.url
   providedIn: 'root'
 })
 export class PostsService {
+
   paginaPosts = 0;
   token:string = null;
   photo: SafeResourceUrl;
   private counter = 0;
   public error: string;
   private loading: any;
+
 
   newPost = new EventEmitter<Post>();
 
@@ -31,7 +33,7 @@ export class PostsService {
                private loginService: LoginService,
                private readonly loadingCtrl: LoadingController,
                private readonly toastCtrl: ToastController) {
-               console.log("🚀 ~ file: posts.service.ts ~ ~ PostsService")
+
                }
 
   getPosts( pull: boolean = false){

@@ -11,6 +11,22 @@
       <strong>{{user.username}}</strong>
     </ion-chip>
   </ion-toolbar>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="10">
+        <ion-searchbar placeholder="Filtrar productos" (ionInput)="search($event)"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <ion-fab vertical="center" horizontal="center" (click)="productCreate()">
+          <ion-fab-button color="primary">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 </ion-header>
 
 <ion-content>

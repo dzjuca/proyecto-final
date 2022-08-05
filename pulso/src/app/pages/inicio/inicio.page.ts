@@ -22,22 +22,17 @@ constructor( private postsService:PostsService,
              private modalController: ModalController) { }
 
 ngOnInit() {
-
-  console.log('[ngOnInit]:InicioPage')
+  // solución temporal
+  this.postsService.paginaPosts = 0;
+  //
   this.user = this.loginService.getUser();
-
   this.loadData();
-
   this.postsService.newPost
       .subscribe( (post) => {
 
         this.posts.unshift( post );
 
       });
-
-
-
-
 
 }
 
@@ -67,7 +62,7 @@ loadData(event?, pull:boolean = false){
 
 
 postCreate() {
-  console.log('[LoginPage] signup()');
+  console.log('[inicioPage] postCreate()');
   this.modalController.create({ component: PostPage})
           .then((modal) => { modal.present() });
 }

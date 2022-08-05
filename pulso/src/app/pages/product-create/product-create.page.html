@@ -1,0 +1,71 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="productCancel()"
+                  color="primary">
+        Cancelar
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Nuevo Producto
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="addProduct()"
+                  [disabled]="product.description.length < 1"
+                  color="primary">
+        Compartir
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list class="forms">
+    <ion-item>
+      <ion-icon slot="start" name="document-text-outline"></ion-icon>
+      <ion-textarea [(ngModel)]="product.description" placeholder="Descripción del producto"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="logo-usd"></ion-icon>
+      <ion-input type="text" placeholder="Precio del producto USD"  [(ngModel)]="product.price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="pricetags-outline"></ion-icon>
+      <ion-input type="text" placeholder="Unidades del producto en stock"  [(ngModel)]="product.stock"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-icon slot="start" name="grid-outline"></ion-icon>
+      <ion-input type="text" placeholder="Categoría"  [(ngModel)]="product.category"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-row class="media">
+    <ion-col size="6">
+      <ion-button expand="full"
+                  shape="round" (click)="camera()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Cámara
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="full"
+                  shape="round" (click)="galeria()">
+        <ion-icon slot="start" name="images"></ion-icon>
+        Galería
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="3" *ngFor="let image of tempImages">
+      <ion-card>
+        <img [src]="image | imageSanitizer">
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

@@ -14,7 +14,7 @@
           [pagination]="{ clickable: true }">
     <ng-template swiperSlide *ngFor="let img of product.imgs">
         <ion-img class="image-slide"
-                 [style]=" ( img | imagen: product.usuario._id) | domSanitizer">
+                 [style]=" ( img | productImage: product.usuario._id) | domSanitizer">
         </ion-img>
     </ng-template>
   </swiper>
@@ -24,21 +24,36 @@
           [pagination]="{ clickable: true }">
     <ng-template swiperSlide>
       <ion-img class="image-slide"
-              [style]=" ( product.imgs[0] | imagen: product.usuario._id) | domSanitizer">
+              [style]=" ( product.imgs[0] | productImage: product.usuario._id) | domSanitizer">
       </ion-img>
     </ng-template>
   </swiper>
-
-  <ion-item lines="none">
-    <ion-icon slot="start" name="heart-outline"></ion-icon>
-    <ion-icon slot="end" name="bookmark-outline"></ion-icon>
-  </ion-item>
-
   <ion-item lines="none">
     <ion-label text-wrap>
       {{product.description}}
     </ion-label>
   </ion-item>
-
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="3">
+        <ion-chip color="primary" outline="false">
+          <ion-icon name="logo-usd"></ion-icon>
+          <ion-label>{{product.price}} </ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="4.5">
+        <ion-chip color="primary" outline="false">
+          <ion-icon name="pricetags-outline"></ion-icon>
+          <ion-label>{{product.stock}} Unidades</ion-label>
+        </ion-chip>
+      </ion-col>
+      <ion-col size="4.5">
+        <ion-chip color="primary" outline="false">
+          <ion-icon name="grid-outline"></ion-icon>
+          <ion-label>{{product.category}}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </div>
 
