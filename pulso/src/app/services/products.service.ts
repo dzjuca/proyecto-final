@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ProductResponse } from '../models/product-response';
 import { Product } from '../models/product';
 import { Photo } from '@capacitor/camera';
@@ -35,17 +35,23 @@ export class ProductsService {
 
                }
 
-  listProducts( pull: boolean = false){
+  listProducts( pull: boolean = false, query?:string){
 
     if (pull){
-
       this.paginaProducts = 0;
-
     }
 
     this.paginaProducts ++;
+    let requestOptions = {};
+
+    if(query){
+
+      const params = new HttpParams().set('query', query);
+      requestOptions = { params: params};
+
+    }
     const url = `${URL}/pulso/products/?page=${this.paginaProducts}`
-    return this.http.get<ProductResponse>(url);
+    return this.http.get<ProductResponse>(url, requestOptions);
 
   }
 

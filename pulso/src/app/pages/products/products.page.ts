@@ -14,6 +14,7 @@ import { ProductCreatePage } from '../product-create/product-create.page';
 export class ProductsPage implements OnInit {
 
   products: Product[] = [];
+  products_search: Product[] = [];
   isEnable = true;
   user: User;
 
@@ -41,16 +42,27 @@ export class ProductsPage implements OnInit {
     this.products = [];
   }
 
-  loadData(event?, pull:boolean = false){
+  loadData(event?, pull:boolean = false, query?: string){
+  console.log("🚀 ~ file: products.page.ts ~ line 46 ~ ProductsPage ~ loadData ~ query", query);
 
-    this.productsService.listProducts( pull )
+
+    let _query = null;
+
+
+    if(query){
+
+      _query = query;
+
+    }
+
+    console.log("🚀 ~ file: products.page.ts ~ line 50 ~ ProductsPage ~ loadData ~ _query", _query);
+
+    this.productsService.listProducts( pull, _query)
         .subscribe((data) => {
-        console.log("🚀 ~ file: products.page.ts ~ line 47 ~ ProductsPage ~ .subscribe ~ data", data);
           this.products.push( ...data.body.products );
 
           if (event){
             event.target.complete();
-
             if(data.body.products.length === 0){
               this.isEnable = false;
             }
@@ -64,8 +76,11 @@ export class ProductsPage implements OnInit {
             .then((modal) => { modal.present() });
   }
 
-  search(event){
-
+  search(event) {
+    let query:string = event.target.value.trim();
+    this.productsService.paginaProducts = 0;
+    this.products = [];
+    this.loadData(null, null, query)
   }
 
 }

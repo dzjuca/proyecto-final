@@ -12,12 +12,10 @@
       <strong>{{user.username}}</strong>
     </ion-chip>
   </ion-toolbar>
-  <ion-searchbar placeholder="Filter Users" (ionInput)="search($event)"></ion-searchbar>
+  <ion-searchbar placeholder="Filtrar Usuarios" (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
 
-
 <ion-content class="ion-padding">
-
   <ion-list>
     <ion-item *ngFor="let user of pulsoUsers">
       <ion-avatar slot="start">
