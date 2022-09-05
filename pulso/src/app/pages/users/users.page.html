@@ -7,7 +7,7 @@
 
     <ion-chip color="primary" outline="true" slot="end">
       <ion-avatar>
-        <img [src]="user.avatar" />
+        <img [src]="( user.avatar | avatar: user._id)" />
       </ion-avatar>
       <strong>{{user.username}}</strong>
     </ion-chip>
@@ -19,8 +19,7 @@
   <ion-list>
     <ion-item *ngFor="let user of pulsoUsers">
       <ion-avatar slot="start">
-        <img *ngIf="user.avatar" [src]="user.avatar" />
-        <img *ngIf="!user.avatar" src="/assets/avatars/av-1.png">
+        <img [src]="( user.avatar | avatar: user._id)" />
       </ion-avatar>
       <ion-label>
         <h2>{{user.username}}</h2>

@@ -2,7 +2,7 @@
 
   <ion-item lines="none">
     <ion-avatar slot="start">
-      <img [src]="product.usuario.avatar" />
+      <img [src]="( product.usuario.avatar | avatar: product.usuario._id)" />
     </ion-avatar>
     <ion-label>
       <h3>{{product.usuario.username}}</h3>

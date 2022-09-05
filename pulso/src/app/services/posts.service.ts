@@ -79,42 +79,6 @@ export class PostsService {
     });
   }
 
-  uploadImage1 ( img: string) {
-    /*
-    console.log("🚀 ~ file: posts.service.ts ~ line 74 ~ PostsService ~ uploadImage ~ img", img);
-    this.token = this.loginService.getToken();
-    if( !this.token ){
-      this.loginService.loadToken()
-          .then(() => {
-            this.token = this.loginService.getToken();
-          })
-    }
-    const url = `${URL}/pulso/posts/upload`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
-    });
-
-    const options: FileUploadOptions = {
-
-      fileKey: 'image',
-      headers: headers
-
-    };
-
-    const fileTransfer: FileTransferObject = this.fileTransfer.create();
-
-    fileTransfer.upload( img, url, options)
-                .then( (data) => {
-                console.log("🚀 ~ file: posts.service.ts ~ line 90 ~ PostsService ~ .then ~ data", data);
-                })
-                .catch((e) => {
-                console.log("🚀 ~ file: posts.service.ts ~ line 93 ~ PostsService ~ uploadImage ~ e", e);
-                })
-  */
-
-  }
-
   async uploadImage2 ( imageData: Photo){
 
     this.loading = await this.loadingCtrl.create({
@@ -171,7 +135,6 @@ export class PostsService {
   }
 
   private handleError(error: any) {
-    console.log("🚀 ~ file: posts.service.ts ~ line 173 ~ PostsService ~ handleError ~ error", error.message);
     const errMsg = error.message ? error.message : error.toString();
     this.error = errMsg;
     return throwError(errMsg);

@@ -32,7 +32,7 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
     this.user = this.loginService.getUser();
     this.usuario = this.loginService.getUsuario();
-    console.log('[ngOnInit:PerfilPage]: ', this.usuario)
+
   }
 
   editPerfil(){
@@ -81,19 +81,6 @@ export class PerfilPage implements OnInit {
         }
       },
       {
-        text: 'Eliminar',
-        role: 'destructive',
-        icon: 'trash',
-        id: 'delete-button',
-        data: {
-          type: 'delete'
-        },
-        handler: async () => {
-          this.user.avatar = 'assets/avatars/av-1.png';
-          await this.loginService.updateUser(this.user);
-        }
-      },
-      {
         text: 'Cancelar',
         icon: 'close',
         role: 'cancel',
@@ -112,21 +99,24 @@ export class PerfilPage implements OnInit {
     const imageData = await Camera.getPhoto({
       quality:100,
       allowEditing:false,
-      resultType:CameraResultType.Base64,
+      resultType:CameraResultType.Uri,
       source:CameraSource.Camera
     });
-    this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
-    await this.loginService.updateUser(this.user);
+    //this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
+    //await this.loginService.updateUser(this.user);
+    await this.loginService.updateAvatar(imageData);
    }
 
  async selectImages(){
   const imageData = await Camera.getPhoto({
     quality:100,
     allowEditing:false,
-    resultType:CameraResultType.Base64,
-    source:CameraSource.Photos
+    resultType:CameraResultType.Uri,
+    source:CameraSource.Photos,
   });
-  this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
-  await this.loginService.updateUser(this.user);
+  //this.user.avatar = 'data:image/jpeg;base64,' + imageData.base64String;
+  //await this.loginService.updateUser(this.user);
+  const response = await this.loginService.updateAvatar(imageData);
+  console.log("🚀 ~ file: perfil.page.ts ~ line 120 ~ PerfilPage ~ selectImages ~ response", response);
  }
 }

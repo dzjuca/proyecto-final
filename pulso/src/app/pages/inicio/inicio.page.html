@@ -7,7 +7,7 @@
 
     <ion-chip color="primary" outline="true" slot="end">
       <ion-avatar>
-        <img [src]="user.avatar" />
+        <img [src]="( user.avatar | avatar: user._id)" />
       </ion-avatar>
       <strong>{{user.username}}</strong>
     </ion-chip>
@@ -24,7 +24,7 @@
           </ion-fab-button>
         </ion-fab>
         <ion-thumbnail>
-          <img [src]="user.avatar" />
+          <img [src]="( user.avatar | avatar: user._id)" />
         </ion-thumbnail>
       </ion-col>
       <ion-col size="2" class="ion-text-center">

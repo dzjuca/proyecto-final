@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    this.user = this.loginService.getUser();
   }
 
 }

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PulsoPageRoutingModule } from './pulso-routing.module';
 
 import { PulsoPage } from './pulso.page';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PulsoPageRoutingModule
+    PulsoPageRoutingModule,
+    PipesModule
   ],
   declarations: [PulsoPage]
 })

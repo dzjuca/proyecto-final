@@ -4,6 +4,12 @@ import { User } from '../models/user';
 import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Photo } from '@capacitor/camera';
+
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {LoadingController, ToastController} from '@ionic/angular';
+import {catchError, finalize} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 const URL = environment.url
 
@@ -12,15 +18,22 @@ const URL = environment.url
 })
 export class LoginService {
 
-  //private rootUrl = 'http://localhost:3000/pulso';
-  // private rootUrl = 'https://pulsobackend.herokuapp.com/pulso'
   private token:string;
   private userId:string;
   private username:string;
   private user: User;
 
+  // -----
+  photo: SafeResourceUrl;
+  private counter = 0;
+  public error: string;
+  private loading: any;
+
   constructor( private http: HttpClient,
-               private router:Router) {
+               private router:Router,
+               private readonly sanitizer: DomSanitizer,
+               private readonly loadingCtrl: LoadingController,
+               private readonly toastCtrl: ToastController) {
    }
    login(username:string, password:string):Promise<void>{
     console.log(`[LoginService] login(${username}, ${password})`)
@@ -203,4 +216,65 @@ export class LoginService {
                })
     })
    }
+
+   async updateAvatar ( imageData: Photo) {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Uploading...'
+    });
+    await this.loading.present();
+
+    if( !this.token ){
+      this.loadToken()
+          .then(() => {
+            this.token = this.getToken();
+          })
+    }
+    const url = `${URL}/pulso/users/avatar/${this.user._id}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(imageData && (imageData.webPath));
+
+    const blob = await fetch(imageData.webPath).then(r => r.blob());
+
+    const formData = new FormData();
+    formData.append('image', blob, `file-${this.counter++}.${imageData.format}`);
+
+    const requestOptions = { headers: headers };
+
+    this.http.put<boolean>(url, formData, requestOptions)
+             .pipe(
+                catchError(e => this.handleError(e)),
+                finalize(() => this.loading.dismiss())
+              )
+             .subscribe((data:any) => {
+              this.user.avatar = data.avatar;
+              this.showToast(data['ok'])
+            });
+  }
+
+  private async showToast(ok: boolean) {
+    if (ok) {
+      const toast = await this.toastCtrl.create({
+        message: 'Upload successful',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    } else {
+      const toast = await this.toastCtrl.create({
+        message: 'Upload failed',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+  }
+
+  private handleError(error: any) {
+    const errMsg = error.message ? error.message : error.toString();
+    this.error = errMsg;
+    return throwError(errMsg);
+  }
 }

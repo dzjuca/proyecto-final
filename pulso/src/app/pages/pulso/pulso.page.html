@@ -4,7 +4,7 @@
       <ion-menu-toggle>
         <ion-item color="primary">
           <ion-avatar slot="start">
-            <img [src]="user.avatar"/>
+            <img [src]="( user.avatar | avatar: user._id)" />
           </ion-avatar>
           <ion-label>
             <ion-text>

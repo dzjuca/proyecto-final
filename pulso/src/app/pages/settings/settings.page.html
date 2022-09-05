@@ -6,9 +6,9 @@
     <ion-title mode="md" color="dark">Configuraciones</ion-title>
     <ion-chip color="primary" outline="true" slot="end">
       <ion-avatar>
-        <img src="/assets/img/avatar/law.png" />
+        <img [src]="( user.avatar | avatar: user._id)" />
       </ion-avatar>
-      <strong>__daniel82__</strong>
+      <strong>{{user.username}}</strong>
     </ion-chip>
   </ion-toolbar>
 </ion-header>
